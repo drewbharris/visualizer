@@ -16,7 +16,13 @@ app.get('/', function(req, res){
 });
 
 io.sockets.on('connection', function (socket) {
-	socket.emit('data', {});
+	socket.emit('handshakeRequest', 'request');
+	var initialTime = new Date().getTime();
+	socket.on('handshakeResponse', function(){
+		var endTime = new Date().getTime();
+		var latency = endTime - initialTime;
+		console.log('latency is ' + latency + 'ms');
+	});
 });
 
 server.listen(8000);

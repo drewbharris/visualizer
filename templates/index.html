@@ -6,8 +6,8 @@
         <script src="/socket.io/socket.io.js"></script>
         <script type="text/javascript">
             var socket = io.connect('http://' + location.host);
-            socket.on('data', function(data){
-                console.log(data);
+            socket.on('handshakeRequest', function(){
+                socket.emit('handshakeResponse', {});
             });
         </script>
     </body>
